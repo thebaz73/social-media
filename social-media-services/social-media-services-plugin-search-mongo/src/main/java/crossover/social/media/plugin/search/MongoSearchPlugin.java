@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * MongoSearchPlugin
- * Created by bazzoni on 01/06/2015.
+ * Created by bazzoni
  */
 @Component
 public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSparkleDocument> {

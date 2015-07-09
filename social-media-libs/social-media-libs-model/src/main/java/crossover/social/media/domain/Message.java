@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Message
- * Created by bazzoni on 09/07/2015.
+ * Created by bazzoni
  */
 @Document
 public class Message {

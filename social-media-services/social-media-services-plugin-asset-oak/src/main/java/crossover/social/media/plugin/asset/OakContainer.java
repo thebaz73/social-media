@@ -2,7 +2,7 @@ package crossover.social.media.plugin.asset;
 
 /**
  * OakContainer
- * Created by bazzoni on 14/06/2015.
+ * Created by bazzoni
  */
 public class OakContainer implements Container {
     private final boolean children;

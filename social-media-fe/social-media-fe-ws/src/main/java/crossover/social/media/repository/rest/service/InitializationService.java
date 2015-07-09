@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * InitializeService
- * Created by bazzoni on 10/07/2015.
+ * Created by bazzoni
  */
 @Service
 public class InitializationService {

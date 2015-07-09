@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Person
- * Created by bazzoni on 09/07/2015.
+ * Created by bazzoni
  */
 @Document
 public class Person {

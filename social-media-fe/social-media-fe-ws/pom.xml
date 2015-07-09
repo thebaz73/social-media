@@ -19,6 +19,10 @@
     <dependencies>
         <dependency>
             <groupId>crossover</groupId>
+            <artifactId>social-media-libs-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>crossover</groupId>
             <artifactId>social-media-services-repository</artifactId>
         </dependency>
         <dependency>
@@ -36,6 +40,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 

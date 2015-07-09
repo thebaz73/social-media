@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * MongoTemplateFactory
- * Created by bazzoni on 01/06/2015.
+ * Created by bazzoni
  */
 public class MongoTemplateFactory {
     private final Mongo mongo;

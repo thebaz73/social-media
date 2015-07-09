@@ -5,7 +5,7 @@ import crossover.social.media.domain.SocialContent;
 
 /**
  * MongoSparkleDocument
- * Created by bazzoni on 01/06/2015.
+ * Created by bazzoni
  */
 public class MongoSparkleDocument implements SearchDocument {
     public static final String FIELD_TITLE = "title";

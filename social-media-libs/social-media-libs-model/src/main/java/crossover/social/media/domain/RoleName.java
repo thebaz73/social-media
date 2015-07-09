@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * RoleName
- * Created by bazzoni on 09/07/2015.
+ * Created by bazzoni
  */
 public enum RoleName {
     ROLE_USER("ROLE_USER"),

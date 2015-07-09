@@ -32,7 +32,7 @@ import static crossover.social.media.plugin.asset.AssetUtils.findAssetTypeByFile
 
 /**
  * OakAssetManagementPlugin
- * Created by bazzoni on 14/06/2015.
+ * Created by bazzoni
  */
 @Component
 public class OakAssetManagementPlugin extends AbstractAssetManagementPlugin<OakContainer, OakAsset> {

@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * OakAsset
- * Created by bazzoni on 14/06/2015.
+ * Created by bazzoni
  */
 public class OakAsset implements Asset {
     private final Logger logger = LoggerFactory.getLogger(getClass());
