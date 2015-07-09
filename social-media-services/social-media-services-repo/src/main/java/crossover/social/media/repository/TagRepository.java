@@ -2,6 +2,7 @@ package crossover.social.media.repository;
 
 import crossover.social.media.domain.Tag;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface TagRepository extends MongoRepository<Tag, String> {
      * @param uri    tag uri
      * @return list of @Tag
      */
-    List<Tag> findBySiteIdAndUri(String siteId, String uri);
+    List<Tag> findBySiteIdAndUri(@Param(value = "siteId") String siteId, @Param(value = "uri") String uri);
 
     /**
      * Finds @Tag given its address
@@ -25,5 +26,5 @@ public interface TagRepository extends MongoRepository<Tag, String> {
      * @param siteId site id
      * @return list of @Tag
      */
-    List<Tag> findBySiteId(String siteId);
+    List<Tag> findBySiteId(@Param(value = "siteId") String siteId);
 }

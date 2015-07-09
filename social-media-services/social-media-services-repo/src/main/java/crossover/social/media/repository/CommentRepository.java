@@ -12,24 +12,6 @@ import java.util.List;
  * Created by thebaz
  */
 public interface CommentRepository extends MongoRepository<Comment, String> {
-
-    /**
-     * Finds list of @Comment given its contentId
-     *
-     * @param siteId site id
-     * @return list of @Comment
-     */
-    List<Comment> findBySiteId(String siteId);
-
-    /**
-     * Finds list of @Comment given its siteId
-     *
-     * @param siteId   site id
-     * @param approved approved flag
-     * @return list of @Comment
-     */
-    List<Comment> findBySiteIdAndApproved(String siteId, boolean approved);
-
     /**
      * Finds list of @Comment given its contentId
      *
@@ -63,23 +45,6 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
      * @return comment count
      */
     int countBySiteId(String siteId);
-
-    /**
-     * Finds list of @Comment given its contentId
-     *
-     * @param contentId content id
-     * @return list of @Comment
-     */
-    List<Comment> findByContentId(String contentId);
-
-    /**
-     * Finds list of @Comment given its contentId
-     *
-     * @param contentId content id
-     * @param approved  approved flag
-     * @return list of @Comment
-     */
-    List<Comment> findByContentIdAndApproved(String contentId, boolean approved);
 
     /**
      * Finds page of @Comment given its contentId

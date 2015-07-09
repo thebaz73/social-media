@@ -12,14 +12,6 @@ import java.util.List;
  * Created by thebaz
  */
 public interface ContentRepository extends MongoRepository<Content, String> {
-    /**
-     * Finds @Content given its site id and uri
-     *
-     * @param siteId site id
-     * @param uri    post uri
-     * @return list of @Content
-     */
-    List<Content> findBySiteIdAndUri(String siteId, String uri);
 
     /**
      * Finds @Content given its site id and uri
@@ -30,15 +22,6 @@ public interface ContentRepository extends MongoRepository<Content, String> {
      * @return page of @Content
      */
     Page<Content> findBySiteIdAndUri(String siteId, String uri, Pageable pageable);
-
-    /**
-     * Finds @CmsContents given its site id
-     *
-     * @param siteId site id
-     * @return list of @Content
-     */
-    List<Content> findBySiteId(String siteId);
-
     /**
      * Finds @CmsContents given its site id
      *

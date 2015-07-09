@@ -1,10 +1,10 @@
 package crossover.social.media.repository;
 
 import crossover.social.media.domain.Site;
-import crossover.social.media.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,21 +20,12 @@ public interface SiteRepository extends MongoRepository<Site, String> {
      * @return list of @EmsSite
      */
     List<Site> findByAddress(String address);
-
     /**
      * Finds @EmsSite given its web master
      *
-     * @param user site web master
-     * @return list of @EmsSite
-     */
-    List<Site> findByWebMaster(User user);
-
-    /**
-     * Finds @EmsSite given its web master
-     *
-     * @param cmsUser  site web master
+     * @param userId  site web master
      * @param pageable pageable
      * @return list of @EmsSite
      */
-    Page<Site> findByWebMaster(User cmsUser, Pageable pageable);
+    Page<Site> findByWebMaster(@Param(value = "userId") String userId, Pageable pageable);
 }

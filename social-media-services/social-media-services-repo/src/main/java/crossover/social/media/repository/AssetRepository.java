@@ -13,13 +13,6 @@ import java.util.List;
  * Created by thebaz
  */
 public interface AssetRepository extends MongoRepository<Asset, String> {
-    /**
-     * Load all site assets
-     *
-     * @param siteId site id
-     * @return list of asset
-     */
-    List<Asset> findBySiteId(String siteId);
 
     /**
      * Load all site assets
@@ -37,15 +30,6 @@ public interface AssetRepository extends MongoRepository<Asset, String> {
      * @return list of asset
      */
     List<Asset> findBySiteIdAndUri(String siteId, String uri);
-
-    /**
-     * Load a site asset by type
-     *
-     * @param siteId site  id
-     * @param type   assert type
-     * @return list of asset
-     */
-    List<Asset> findBySiteIdAndType(String siteId, AssetType type);
 
     /**
      * Load a site asset by type
