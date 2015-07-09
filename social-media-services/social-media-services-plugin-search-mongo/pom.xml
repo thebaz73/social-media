@@ -10,20 +10,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>social-media-services-repo</artifactId>
+    <artifactId>social-media-services-plugin-search-mongo</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>crossover</groupId>
-            <artifactId>social-media-libs-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <artifactId>social-media-services-plugin</artifactId>
         </dependency>
     </dependencies>
 </project>

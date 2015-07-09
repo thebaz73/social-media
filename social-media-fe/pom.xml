@@ -16,5 +16,6 @@
 
     <modules>
         <module>social-media-fe-ui</module>
+        <module>social-media-fe-ws</module>
     </modules>
 </project>

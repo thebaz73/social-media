@@ -13,6 +13,10 @@ logging:
     level.org.springframework: INFO
     level.crossover.social: DEBUG
 
+social:
+    media.admin.username: admin
+    media.admin.password: q1w2e3r4
+
 server:
     port: 9000
 
