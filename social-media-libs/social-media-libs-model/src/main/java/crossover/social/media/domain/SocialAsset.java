@@ -8,11 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 /**
- * Asset
+ * SocialAsset
  * Created by thebaz
  */
 @Document
-public class Asset {
+public class SocialAsset {
     @Id
     private String id;
     @Indexed
@@ -24,11 +24,11 @@ public class Asset {
     @Indexed(unique = true)
     private String uri;
 
-    public Asset() {
+    public SocialAsset() {
     }
 
     @PersistenceConstructor
-    public Asset(String siteId, String name, Date modificationDate, String title, String uri) {
+    public SocialAsset(String siteId, String name, Date modificationDate, String title, String uri) {
         this.siteId = siteId;
         this.name = name;
         this.modificationDate = modificationDate;

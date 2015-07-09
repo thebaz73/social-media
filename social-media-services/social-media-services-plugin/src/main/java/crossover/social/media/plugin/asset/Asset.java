@@ -1,12 +1,12 @@
 package crossover.social.media.plugin.asset;
 
 /**
- * Asset
+ * SocialAsset
  * Created by bazzoni
  */
 public interface Asset {
     /**
-     * Get Asset URI
+     * Get SocialAsset URI
      *
      * @return asset URI
      */

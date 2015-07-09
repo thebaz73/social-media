@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Content
+ * SocialContent
  * Created by thebaz
  */
 @Document
@@ -21,7 +21,7 @@ import java.util.List;
         @CompoundIndex(name = "site_uri_idx", def = "{'siteId' : 1, 'uri' : 1}")
 })
 
-public class Content {
+public class SocialContent {
 
     private final String type;
     @Id
@@ -36,20 +36,20 @@ public class Content {
     private String summary;
     private String content;
     @DBRef
-    private List<Asset> assets;
+    private List<SocialAsset> assets;
     @DBRef
     private List<Tag> tags;
 
-    public Content() {
+    public SocialContent() {
         this.type = "CONTENT";
     }
 
-    public Content(String type) {
+    public SocialContent(String type) {
         this.type = type;
     }
 
     @PersistenceConstructor
-    public Content(String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
+    public SocialContent(String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
         this("CONTENT");
         this.siteId = siteId;
         this.name = name;
@@ -132,14 +132,14 @@ public class Content {
         this.content = content;
     }
 
-    public List<Asset> getAssets() {
+    public List<SocialAsset> getAssets() {
         if (assets == null) {
             assets = new ArrayList<>();
         }
         return assets;
     }
 
-    public void setAssets(List<Asset> assets) {
+    public void setAssets(List<SocialAsset> assets) {
         this.assets = assets;
     }
 
