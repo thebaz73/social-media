@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>social-media-services-repo</module>
+        <module>social-media-services-repository</module>
         <module>social-media-services-plugin</module>
         <module>social-media-services-plugin-asset-oak</module>
         <module>social-media-services-plugin-search-mongo</module>

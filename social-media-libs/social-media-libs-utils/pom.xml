@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>crossover</groupId>
-            <artifactId>social-media-services-repo</artifactId>
+            <artifactId>social-media-services-repository</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
