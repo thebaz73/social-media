@@ -1,6 +1,6 @@
 package crossover.social.media.repository;
 
-import crossover.social.media.domain.CmsContent;
+import crossover.social.media.domain.Content;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -8,36 +8,36 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 /**
- * CmsContentRepository
+ * ContentRepository
  * Created by thebaz
  */
-public interface CmsContentRepository extends MongoRepository<CmsContent, String> {
+public interface ContentRepository extends MongoRepository<Content, String> {
     /**
-     * Finds @CmsContent given its site id and uri
+     * Finds @Content given its site id and uri
      *
      * @param siteId site id
      * @param uri    post uri
-     * @return list of @CmsContent
+     * @return list of @Content
      */
-    List<CmsContent> findBySiteIdAndUri(String siteId, String uri);
+    List<Content> findBySiteIdAndUri(String siteId, String uri);
 
     /**
-     * Finds @CmsContent given its site id and uri
+     * Finds @Content given its site id and uri
      *
      * @param siteId   site id
      * @param uri      post uri
      * @param pageable page info
-     * @return page of @CmsContent
+     * @return page of @Content
      */
-    Page<CmsContent> findBySiteIdAndUri(String siteId, String uri, Pageable pageable);
+    Page<Content> findBySiteIdAndUri(String siteId, String uri, Pageable pageable);
 
     /**
      * Finds @CmsContents given its site id
      *
      * @param siteId site id
-     * @return list of @CmsContent
+     * @return list of @Content
      */
-    List<CmsContent> findBySiteId(String siteId);
+    List<Content> findBySiteId(String siteId);
 
     /**
      * Finds @CmsContents given its site id
@@ -45,15 +45,15 @@ public interface CmsContentRepository extends MongoRepository<CmsContent, String
      * @param siteId    site id
      * @param published published
      * @param pageable  page info
-     * @return page of @CmsContent
+     * @return page of @Content
      */
-    Page<CmsContent> findBySiteIdAndPublished(String siteId, boolean published, Pageable pageable);
+    Page<Content> findBySiteIdAndPublished(String siteId, boolean published, Pageable pageable);
 
     /**
      * Counts @CmsContents given its site id
      *
      * @param siteId site id
-     * @return number of @CmsContent
+     * @return number of @Content
      */
     int countBySiteId(String siteId);
 
@@ -62,5 +62,5 @@ public interface CmsContentRepository extends MongoRepository<CmsContent, String
      *
      * @param siteId site id
      */
-    List<CmsContent> deleteBySiteId(String siteId);
+    List<Content> deleteBySiteId(String siteId);
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * CmsContent
+ * Content
  * Created by thebaz
  */
 @Document
@@ -21,7 +21,7 @@ import java.util.List;
         @CompoundIndex(name = "site_uri_idx", def = "{'siteId' : 1, 'uri' : 1}")
 })
 
-public class CmsContent {
+public class Content {
 
     private final String type;
     @Id
@@ -40,16 +40,16 @@ public class CmsContent {
     @DBRef
     private List<Tag> tags;
 
-    public CmsContent() {
+    public Content() {
         this.type = "CONTENT";
     }
 
-    public CmsContent(String type) {
+    public Content(String type) {
         this.type = type;
     }
 
     @PersistenceConstructor
-    public CmsContent(String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
+    public Content(String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
         this("CONTENT");
         this.siteId = siteId;
         this.name = name;
