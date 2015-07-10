@@ -32,8 +32,16 @@ public class User {
         this.roles = new ArrayList<>();
     }
 
-    @PersistenceConstructor
     public User(String username, String password, Collection<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = new ArrayList<>();
+        this.roles.addAll(roles.stream().collect(Collectors.toList()));
+    }
+
+    @PersistenceConstructor
+    public User(String id, String username, String password, Collection<Role> roles) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.roles = new ArrayList<>();

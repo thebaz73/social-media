@@ -8,6 +8,14 @@ public class Email {
     private String email;
     private boolean primary;
 
+    public Email() {
+    }
+
+    public Email(String email, boolean primary) {
+        this.email = email;
+        this.primary = primary;
+    }
+
     public String getEmail() {
         return email;
     }
