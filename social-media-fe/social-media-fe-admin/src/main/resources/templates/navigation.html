@@ -1,0 +1,73 @@
+<nav xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+     class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" th:href="@{/home}" href="/"><i class="fa fa-play-circle"></i> <span
+                class="light">Social </span>
+            Media</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        <!-- /.dropdown -->
+        <li sec:authorize="isAuthenticated()" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a th:href="@{/profile}" href="/"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/settings}" href="/"><i
+                        class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li><a th:href="@{/logout}" href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation" sec:authorize="isAuthenticated()">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" id="searchText" class="form-control" placeholder="Search..."
+                               th:value="${query}"/>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" id="searchButton" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                    </div>
+                </li>
+                <li>
+                    <a th:href="@{/home}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a th:href="@{/company}" href="/"><i class="fa fa-building-o fa-fw"></i> Company management</a>
+                </li>
+                <li>
+                    <a th:href="@{/users}" href="/"><i class="fa fa-users fa-fw"></i> User Management</a>
+                </li>
+                <li>
+                    <a th:href="@{/sites}" href="/"><i
+                            class="fa fa-sitemap fa-fw"></i> Site management</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+    <form id="hidden" role="form" class="hidden" th:action="@{/search}" action="#">
+        <input type="hidden" id="query" name="query"/>
+    </form>
+</nav>
