@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>social-media-fe-ui</artifactId>
+    <artifactId>social-media-fe-signon</artifactId>
 
     <properties>
         <start-class>crossover.sociel.media.fe.ui.Application</start-class>
