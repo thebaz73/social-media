@@ -1,0 +1,43 @@
+---
+spring:
+    profiles.active: test
+---
+spring:
+    profiles: development
+    data:
+      mongodb.host: 192.168.108.129
+      mongodb.port: 27017
+      mongodb.name: social-db
+
+logging:
+    level.org.springframework: INFO
+    level.crossover.social: DEBUG
+
+social:
+    media.admin.username: admin
+    media.admin.password: q1w2e3r4
+    media.search.dbName: social-db
+
+server:
+    port: 9000
+
+management:
+    port: 9001
+---
+spring:
+    profiles: test
+    data:
+      mongodb.host: 172.31.10.154
+      mongodb.port: 27017
+      mongodb.name: social-db
+
+logging:
+    level.org.springframework: INFO
+    level.crossover.social: WARN
+
+server:
+    port: 80
+    address: 0.0.0.0
+
+management:
+    port: 8081

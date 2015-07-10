@@ -15,7 +15,7 @@ import java.util.List;
  * Created by bazzoni
  */
 @Service
-public class InitializationService {
+public class ServiceInitializer {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired

@@ -15,7 +15,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>social-media-fe-asset</module>
         <module>social-media-fe-signon</module>
+        <module>social-media-fe-search</module>
         <module>social-media-fe-ws</module>
     </modules>
 </project>

@@ -29,7 +29,6 @@ public abstract class PluginImpl implements Plugin {
     protected PluginStatus status;
     protected Properties properties;
     protected List<Setting> settings;
-    protected String filter;
     @Autowired
     protected SettingRepository settingRepository;
 
@@ -99,16 +98,6 @@ public abstract class PluginImpl implements Plugin {
     }
 
     /**
-     * Set filter
-     *
-     * @param filter filter
-     */
-    @Override
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    /**
      * Get spring initialized resource
      *
      * @return resource
@@ -123,7 +112,7 @@ public abstract class PluginImpl implements Plugin {
     @Override
     public void doActivate() throws PluginOperationException {
         status = PluginStatus.INSTALLED;
-        if (getSetting("activate", Boolean.class, Boolean.parseBoolean(properties.getProperty("crossover.social.media.plugin.activate")))) {
+        if (getSetting("activate", Boolean.class, Boolean.parseBoolean(properties.getProperty("plugin.activate")))) {
             status = PluginStatus.NOT_READY;
             doValidate();
         }
@@ -148,12 +137,12 @@ public abstract class PluginImpl implements Plugin {
     protected void initialize() throws PluginOperationException {
         try {
             properties = PropertiesLoaderUtils.loadProperties(getResource());
-            if (!properties.containsKey("crossover.social.media.plugin.id")) {
+            if (!properties.containsKey("plugin.id")) {
                 id = UUID.randomUUID().toString();
             } else {
-                id = properties.getProperty("crossover.social.media.plugin.id");
+                id = properties.getProperty("plugin.id");
             }
-            name = properties.getProperty("crossover.social.media.plugin.name");
+            name = properties.getProperty("plugin.name");
         } catch (IOException e) {
             logger.error("Cannot load properties", e);
         }
@@ -185,7 +174,7 @@ public abstract class PluginImpl implements Plugin {
      */
     protected <T> T getSetting(String key, Class<T> clazz, T defaultValue) throws PluginOperationException {
         String compoundKey = getCompoundKey(key);
-        List<Setting> settings = settingRepository.findByKeyAndUserId(compoundKey, filter, null).getContent();
+        List<Setting> settings = settingRepository.findByKey(compoundKey);
         if (!settings.isEmpty() && settings.get(0).getKey().equals(compoundKey)) {
             return clazz.cast(settings.get(0).getValue());
         }

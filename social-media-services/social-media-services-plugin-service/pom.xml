@@ -15,11 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>crossover</groupId>
-            <artifactId>social-media-services-plugin-asset-oak</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>crossover</groupId>
-            <artifactId>social-media-services-plugin-search-mongo</artifactId>
+            <artifactId>social-media-services-plugin</artifactId>
         </dependency>
     </dependencies>
 </project>

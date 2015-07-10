@@ -1,9 +1,6 @@
 package crossover.social.media.plugin.service;
 
 
-import crossover.social.media.domain.RoleName;
-import crossover.social.media.domain.Setting;
-import crossover.social.media.domain.User;
 import crossover.social.media.plugin.Plugin;
 import crossover.social.media.plugin.PluginOperationException;
 import crossover.social.media.plugin.PluginStatus;
@@ -22,7 +19,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,9 +31,9 @@ public class PluginService extends AbstractSettingAwareService {
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
-    private UserRepository cmsUserRepository;
+    private UserRepository userRepository;
     @Autowired
-    private SettingRepository cmsSettingRepository;
+    private SettingRepository settingRepository;
     private AssetManagementPlugin<? extends Container, ? extends Asset> assetManagementPlugin;
     private SearchPlugin<? extends SearchDocument> searchPlugin;
 
@@ -99,18 +95,7 @@ public class PluginService extends AbstractSettingAwareService {
         for (Map.Entry<String, Plugin> entry : pluginMap.entrySet()) {
             logger.debug("Handling settings for bean {}", entry.getKey());
             Plugin plugin = entry.getValue();
-            final List<User> cmsUsers = cmsUserRepository.findAll();
-            for (User cmsUser : cmsUsers) {
-                if (cmsUser.getRoles().stream().anyMatch(r -> r.getRole().equals(RoleName.ROLE_MANAGER))) {
-                    plugin.setFilter(cmsUser.getId());
-                    for (Setting cmsSetting : plugin.getSettings()) {
-                        cmsSetting.setUserId(cmsUser.getId());
-                        if (cmsSettingRepository.findByKeyAndUserId(cmsSetting.getKey(), cmsSetting.getUserId(), null).getContent().isEmpty()) {
-                            cmsSettingRepository.save(cmsSetting);
-                        }
-                    }
-                }
-            }
+            plugin.getSettings().stream().filter(cmsSetting -> settingRepository.findByKey(cmsSetting.getKey()).isEmpty()).forEach(settingRepository::save);
         }
         initialized = true;
     }

@@ -53,13 +53,6 @@ public interface Plugin {
     List<Setting> getSettings();
 
     /**
-     * Set filter
-     *
-     * @param filter filter
-     */
-    void setFilter(String filter);
-
-    /**
      * Activates crossover.social.media.plugin
      *
      * @throws PluginOperationException if error

@@ -116,6 +116,11 @@
                 <artifactId>social-media-services-plugin-search-mongo</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>crossover</groupId>
+                <artifactId>social-media-services-plugin-service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
