@@ -50,7 +50,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!--@thymesVar id="aSetting" type="sparkle.cms.domain.CmsSetting"-->
                                 <tr th:each="aSetting : ${allSettings}" valign="middle">
                                     <td th:text="${aSetting.key}">Key</td>
                                     <td th:text="${aSetting.value}">Value</td>
@@ -76,7 +75,6 @@
                         </div>
                     </div>
                     <!--@thymesVar id="plugins" type="java.util.List"-->
-                    <!--@thymesVar id="plugin" type="sparkle.cms.authoring.ui.domain.PluginData"-->
                     <div class="panel panel-default" th:each="plugin : ${plugins}">
                         <div class="panel-heading" role="tab" th:id="${'heading' + plugin.id}">
                             <a data-toggle="collapse"
@@ -99,8 +97,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!--@thymesVar id="aSetting" type="sparkle.cms.domain.CmsSetting"-->
-                                <tr th:each="aSetting : ${plugin.cmsSettings}" valign="middle">
+                                <tr th:each="aSetting : ${plugin.settings}" valign="middle">
                                     <td th:text="${aSetting.key}">Key</td>
                                     <td th:text="${aSetting.value}">Value</td>
                                     <td>
@@ -147,13 +144,11 @@
                 </div>
             </section>
             <section class="col-lg-12">
-                <!--@thymesVar id="cmsSetting" type="sparkle.cms.domain.CmsSetting"-->
-                <form class="form-horizontal" role="form" th:action="@{/settings}" th:object="${cmsSetting}"
+                <form class="form-horizontal" role="form" th:action="@{/settings}" th:object="${setting}"
                       action="#"
                       method="POST">
                     <input type="hidden" name="_method" value="PUT"/>
                     <input type="hidden" id="id" th:field="*{id}"/>
-                    <input type="hidden" id="userId" th:field="*{userId}"/>
                     <input type="hidden" id="type" th:field="*{type}"/>
 
                     <div class="lead" th:text="#{setting.data}">Setting Data</div>
@@ -179,35 +174,35 @@
                                th:text="#{setting.value}">Value</label>
 
                         <div class="col-sm-10">
-                            <input th:if="${cmsSetting.type == null }" type="text" class="form-control" id="value"
+                            <input th:if="${setting.type == null }" type="text" class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required" readonly="readonly"/>
-                            <select th:if="${#strings.toString(cmsSetting.type) == 'BOOL' }" type="text"
+                            <select th:if="${#strings.toString(setting.type) == 'BOOL' }" type="text"
                                     class="form-control" id="value"
                                     th:field="*{value}"
                                     th:errorclass="has-error" required="required">
-                                <option value="true" th:selected="${cmsSetting.value == true}">TRUE</option>
-                                <option value="false" th:selected="${cmsSetting.value == false}">FALSE</option>
+                                <option value="true" th:selected="${setting.value == true}">TRUE</option>
+                                <option value="false" th:selected="${setting.value == false}">FALSE</option>
                             </select>
-                            <input th:if="${#strings.toString(cmsSetting.type) == 'TEXT' }" type="text"
+                            <input th:if="${#strings.toString(setting.type) == 'TEXT' }" type="text"
                                    class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required"/>
 
-                            <input th:if="${#strings.toString(cmsSetting.type) == 'EMAIL' }" type="email"
+                            <input th:if="${#strings.toString(setting.type) == 'EMAIL' }" type="email"
                                    class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required"/>
-                            <input th:if="${#strings.toString(cmsSetting.type) == 'INET' }" type="url"
+                            <input th:if="${#strings.toString(setting.type) == 'INET' }" type="url"
                                    class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required"/>
 
-                            <input th:if="${#strings.toString(cmsSetting.type) == 'INTEGER' }" type="number"
+                            <input th:if="${#strings.toString(setting.type) == 'INTEGER' }" type="number"
                                    class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required"/>
-                            <input th:if="${#strings.toString(cmsSetting.type) == 'DOUBLE' }" type="number"
+                            <input th:if="${#strings.toString(setting.type) == 'DOUBLE' }" type="number"
                                    class="form-control" id="value"
                                    th:field="*{value}"
                                    th:errorclass="has-error" required="required"/>
@@ -236,7 +231,7 @@
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script th:src="@{/dist/js/sb-admin-2.js}" src="../public/dist/js/sb-admin-2.js"></script>
+<script th:src="@{/js/admin.ui.js}" src="../public/js/admin.ui.js"></script>
 
 </body>
 

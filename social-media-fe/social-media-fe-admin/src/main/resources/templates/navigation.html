@@ -8,8 +8,8 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" th:href="@{/home}" href="/"><i class="fa fa-play-circle"></i> <span
-                class="light">Social </span>
-            Media</a>
+                class="light" th:if="${company != null}" th:text="${company.name}"></span>
+            Social Media</a>
     </div>
     <!-- /.navbar-header -->
 

@@ -5,7 +5,8 @@
     <meta name="description" content=""/>
     <meta name="author" content="Marco Bazzoni"/>
 
-    <title>Crossover Social Media - Admin UI</title>
+    <title th:if="${company != null}" th:text="${company.name + ' Social Media - Admin UI'}">Crossover Social Media -
+        Admin UI</title>
 
     <!-- Bootstrap Core CSS -->
     <link th:href="@{/webjars/bootstrap/3.1.0/css/bootstrap-theme.min.css}"

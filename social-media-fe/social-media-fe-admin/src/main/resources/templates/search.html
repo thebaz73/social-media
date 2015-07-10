@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="head"></head>
+
+<body>
+
+<div id="wrapper">
+    <nav th:replace="navigation"></nav>
+    <!-- Navigation -->
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Search</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                Found <!--@thymesVar id="docs" type="java.util.List"-->
+                <span th:text="${docs.size()}"></span> documents, searching for: '<span th:text="${query}"></span>'
+            </div>
+            <div class="col-lg-12" th:each="doc : ${docs}">
+                <h4><a href="#" th:href="@{${'contents/'+doc.id}}" th:text="${doc.name}">Title</a></h4>
+
+                <p><span th:text="${'/'+doc.uri}">Uri</span> - <span
+                        th:text="${#calendars.format(doc.date, 'dd/MM/yyyy HH:mm:ss')}">Date</span> - <span
+                        th:text="${doc.summary}">Summary</span></p>
+            </div>
+        </div>
+        <footer th:replace="footer"></footer>
+    </div>
+
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/webjars/bootstrap/3.1.0/js/bootstrap.min.js}"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/dist/js/sb-admin-2.js}" src="../public/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

@@ -1,9 +1,6 @@
 package crossover.social.media.fe.admin.ui.web;
 
-import crossover.social.media.domain.Office;
-import crossover.social.media.domain.Site;
-import crossover.social.media.domain.SocialAsset;
-import crossover.social.media.domain.User;
+import crossover.social.media.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +14,13 @@ import java.util.List;
  */
 @Controller
 public class DashboardController {
+    @ModelAttribute("company")
+    Company company() {
+        final Company company = new Company();
+        company.setName("Acme Corp.");
+        return company;
+    }
+
     @ModelAttribute("allSites")
     List<Site> allSites() {
         return new ArrayList<>();
