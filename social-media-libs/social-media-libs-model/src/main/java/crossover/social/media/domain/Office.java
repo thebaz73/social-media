@@ -14,6 +14,7 @@ public class Office {
     @Id
     private String id;
     private String name;
+    private String department;
     @DBRef
     private Address address;
 
@@ -21,9 +22,10 @@ public class Office {
     }
 
     @PersistenceConstructor
-    public Office(String id, String name, Address address) {
+    public Office(String id, String name, String department, Address address) {
         this.id = id;
         this.name = name;
+        this.department = department;
         this.address = address;
     }
 
@@ -41,6 +43,14 @@ public class Office {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public Address getAddress() {
