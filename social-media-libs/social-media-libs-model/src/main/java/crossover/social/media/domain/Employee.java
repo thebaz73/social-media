@@ -15,16 +15,16 @@ public class Employee {
     private String id;
     private String code;
     @DBRef
-    private Company company;
+    private Office office;
 
     public Employee() {
     }
 
     @PersistenceConstructor
-    public Employee(String id, String code, Company company) {
+    public Employee(String id, String code, Office office) {
         this.id = id;
         this.code = code;
-        this.company = company;
+        this.office = office;
     }
 
     public String getId() {
@@ -43,11 +43,11 @@ public class Employee {
         this.code = code;
     }
 
-    public Company getCompany() {
-        return company;
+    public Office getOffice() {
+        return office;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setOffice(Office office) {
+        this.office = office;
     }
 }

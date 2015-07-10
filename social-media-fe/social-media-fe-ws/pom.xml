@@ -13,7 +13,7 @@
     <artifactId>social-media-fe-ws</artifactId>
 
     <properties>
-        <start-class>crossover.social.media.repository.rest.Application</start-class>
+        <start-class>crossover.social.media.fe.ws.Application</start-class>
     </properties>
 
     <dependencies>

@@ -13,11 +13,34 @@
     <artifactId>social-media-fe-signon</artifactId>
 
     <properties>
-        <start-class>crossover.sociel.media.fe.ui.Application</start-class>
+        <start-class>crossover.social.media.fe.signon.Application</start-class>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>crossover</groupId>
+            <artifactId>social-media-libs-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>crossover</groupId>
+            <artifactId>social-media-services-repository</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

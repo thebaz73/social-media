@@ -1,4 +1,4 @@
-package crossover.social.media.repository.rest.config;
+package crossover.social.media.fe.ws.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

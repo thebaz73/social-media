@@ -1,4 +1,4 @@
-package crossover.social.media.repository.rest.service;
+package crossover.social.media.fe.ws.service;
 
 import crossover.social.media.domain.Role;
 import crossover.social.media.domain.RoleName;

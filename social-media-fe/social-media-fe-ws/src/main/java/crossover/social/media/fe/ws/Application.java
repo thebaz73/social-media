@@ -1,9 +1,9 @@
-package crossover.social.media.repository.rest;
+package crossover.social.media.fe.ws;
 
 import crossover.social.media.domain.Role;
 import crossover.social.media.domain.RoleName;
 import crossover.social.media.domain.User;
-import crossover.social.media.repository.rest.service.InitializationService;
+import crossover.social.media.fe.ws.service.InitializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;

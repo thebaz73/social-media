@@ -2,9 +2,11 @@ package crossover.social.media.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Person
@@ -16,8 +18,7 @@ public class Person {
     private String id;
     private String firstName;
     private String lastName;
-    @Indexed(unique = true)
-    private String email;
+    private List<Email> emails;
     @DBRef
     private User user;
     @DBRef
@@ -26,14 +27,14 @@ public class Person {
     private Employee employee;
 
     public Person() {
+        emails = new ArrayList<>();
     }
 
     @PersistenceConstructor
-    public Person(String id, String firstName, String lastName, String email, User user, Address address, Employee employee) {
+    public Person(String id, String firstName, String lastName, User user, Address address, Employee employee) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.user = user;
         this.address = address;
         this.employee = employee;
@@ -63,12 +64,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Email> getEmails() {
+        return emails;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
     }
 
     public User getUser() {
