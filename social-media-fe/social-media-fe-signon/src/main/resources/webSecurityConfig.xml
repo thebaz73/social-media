@@ -10,7 +10,8 @@
 
     <http use-expressions="true"
           create-session="stateless" auto-config="true">
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/api/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/public/**" access="isAnonymous()"/>
         <http-basic/>
     </http>
 

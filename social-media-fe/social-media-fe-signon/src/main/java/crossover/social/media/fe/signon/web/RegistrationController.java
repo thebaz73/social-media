@@ -16,21 +16,20 @@ import java.io.IOException;
  * Created by bazzoni on 10/07/2015.
  */
 @RestController
-@RequestMapping(value = "/public")
 public class RegistrationController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RegistrationManager registrationManager;
 
-    @RequestMapping(value = "/user/{type}", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/user/{type}", method = RequestMethod.POST)
     public void createUser(HttpServletResponse response,
                            @PathVariable(value = "type") String type,
-                           @RequestBody UserData user) throws IOException {
+                           @RequestBody UserData userData) throws IOException {
         try {
-            registrationManager.createUser(RegistrationManager.getUserType(type.toUpperCase()), user);
+            registrationManager.createUser(RegistrationManager.getUserType(type.toUpperCase()), userData);
         } catch (RegistrationException e) {
-            String msg = String.format("Cannot create user. Reason: %s", e.toString());
+            String msg = String.format("Cannot create userData. Reason: %s", e.toString());
             logger.info(msg, e);
             response.sendError(400, msg);
         }
