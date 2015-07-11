@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  * Created by bazzoni
  */
 @Document
-public class User {
+public class User implements Serializable {
     @Id
     private String id;
     @Indexed(unique = true)

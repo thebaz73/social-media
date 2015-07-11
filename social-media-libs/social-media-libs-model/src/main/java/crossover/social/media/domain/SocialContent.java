@@ -26,6 +26,7 @@ public class SocialContent {
     private final String type;
     @Id
     private String id;
+    private String authorId;
     private String siteId;
     private String name;
     private String title;
@@ -49,8 +50,9 @@ public class SocialContent {
     }
 
     @PersistenceConstructor
-    public SocialContent(String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
+    public SocialContent(String authorId, String siteId, String name, String title, String uri, Date modificationDate, String summary, String content) {
         this("CONTENT");
+        this.authorId = authorId;
         this.siteId = siteId;
         this.name = name;
         this.title = title;
@@ -66,6 +68,14 @@ public class SocialContent {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public String getSiteId() {

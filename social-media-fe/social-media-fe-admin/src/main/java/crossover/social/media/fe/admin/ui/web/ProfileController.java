@@ -1,9 +1,11 @@
 package crossover.social.media.fe.admin.ui.web;
 
+import crossover.social.media.domain.Company;
 import crossover.social.media.fe.admin.ui.web.model.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +21,13 @@ import java.util.Map;
 @Controller
 public class ProfileController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @ModelAttribute("company")
+    Company company() {
+        final Company company = new Company();
+        company.setName("Acme Corp.");
+        return company;
+    }
 
     @RequestMapping({"/profile"})
     public String userProfile(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {

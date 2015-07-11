@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="head"></head>
+
+<body>
+
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" action="#" method="POST">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required"
+               autofocus="autofocus"/>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+               required="required"/>
+
+        <div class="checkbox">
+            <label>
+                <input name="remember-me" type="checkbox" value="Remember Me"/> Remember Me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+
+    <div th:if="${param.error}" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span
+                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Attention!</strong> There was an error, please try again.
+    </div>
+</div>
+<!-- /container -->
+
+</body>
+</html>

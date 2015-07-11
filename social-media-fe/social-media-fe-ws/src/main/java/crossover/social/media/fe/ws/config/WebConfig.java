@@ -11,6 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"crossover.social.media.repository"})
+@ComponentScan({"crossover.social.media"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 }

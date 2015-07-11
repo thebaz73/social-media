@@ -1,6 +1,6 @@
-package crossover.social.media.fe.admin.ui.config;
+package crossover.social.media.fe.ui.config;
 
-import crossover.social.media.security.ReadOnlyUserManager;
+import crossover.social.media.fe.ui.business.WebServiceUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +35,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             "classpath:/META-INF/resources/", "classpath:/resources/",
             "classpath:/static/", "classpath:/public/"};
     @Autowired
-    private ReadOnlyUserManager userManager;
+    private WebServiceUserManager userManager;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

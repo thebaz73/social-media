@@ -1,0 +1,69 @@
+---
+spring:
+    profiles.active: test
+---
+spring:
+    profiles: development
+    data:
+      mongodb.host: 192.168.108.129
+      mongodb.port: 27017
+      mongodb.name: social-db
+
+# REDIS (RedisProperties)
+#    redis.database: # database name
+    redis.host: 192.168.108.129 # server host
+#    redis.password: # server password
+    redis.port: 6379 # connection port
+#    redis.pool.max-idle: 8 # pool settings ...
+#    redis.pool.min-idle: 0
+#    redis.pool.max-active: 8
+#    redis.pool.max-wait: -1
+#    redis.sentinel.master: # name of Redis server
+#    redis.sentinel.nodes: # comma-separated list of host:port pairs
+
+logging:
+    level.org.springframework: INFO
+    level.crossover.social: DEBUG
+
+social:
+    media.admin.username: admin
+    media.admin.password: q1w2e3r4
+    repository.service.host: localhost
+    repository.service.port: 19000
+
+server:
+    port: 9000
+
+management:
+    port: 9001
+---
+spring:
+    profiles: test
+    data:
+      mongodb.host: 172.31.10.154
+      mongodb.port: 27017
+      mongodb.name: social-db
+
+# REDIS (RedisProperties)
+#    redis.database: # database name
+    redis.host: 172.31.10.154 # server host
+#    redis.password: # server password
+    redis.port: 6379 # connection port
+#    redis.pool.max-idle: 8 # pool settings ...
+#    redis.pool.min-idle: 0
+#    redis.pool.max-active: 8
+#    redis.pool.max-wait: -1
+#    redis.sentinel.master: # name of Redis server
+#    redis.sentinel.nodes: # comma-separated list of host:port pairs
+
+
+logging:
+    level.org.springframework: INFO
+    level.crossover.social: WARN
+
+server:
+    port: 80
+    address: 0.0.0.0
+
+management:
+    port: 8081
