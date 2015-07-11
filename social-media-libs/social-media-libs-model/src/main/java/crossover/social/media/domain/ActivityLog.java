@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by bazzoni on 11/07/2015.
  */
 @Document
-public class ActivityLog extends User {
+public class ActivityLog {
     @Id
     private String id;
     private Date timestamp;

@@ -21,7 +21,7 @@ import java.util.List;
         @CompoundIndex(name = "site_uri_idx", def = "{'siteId' : 1, 'uri' : 1}")
 })
 
-public class SocialContent extends Site {
+public class SocialContent {
 
     private final String type;
     @Id

@@ -1,6 +1,7 @@
 package crossover.social.media.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -8,11 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by bazzoni on 11/07/2015.
  */
 @Document
-public class CustomerData extends Company {
+public class CustomerData {
     @Id
     private String id;
     private String customer;
     private String data;
+    @Indexed
     private String companyId;
 
     public CustomerData() {
