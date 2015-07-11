@@ -14,23 +14,27 @@ import java.util.List;
  * Created by bazzoni
  */
 @Document
-public class Chat {
+public class Chat extends User {
     @Id
     private String id;
     @Indexed
     private String subject;
     @DBRef
     private List<Message> messages;
+    @DBRef
+    private List<User> users;
 
     public Chat() {
         messages = new ArrayList<>();
+        users = new ArrayList<>();
     }
 
     @PersistenceConstructor
-    public Chat(String id, String subject, List<Message> messages) {
+    public Chat(String id, String subject, List<Message> messages, List<User> users) {
         this.id = id;
         this.subject = subject;
         this.messages = messages;
+        this.users = users;
     }
 
     public String getId() {
@@ -55,5 +59,13 @@ public class Chat {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
