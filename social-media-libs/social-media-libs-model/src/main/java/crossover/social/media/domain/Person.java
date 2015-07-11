@@ -38,6 +38,7 @@ public class Person {
         this.user = user;
         this.address = address;
         this.employee = employee;
+        this.emails = new ArrayList<>();
     }
 
     public String getId() {

@@ -10,7 +10,7 @@
 
     <http use-expressions="true"
           create-session="stateless" auto-config="true">
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
         <http-basic/>
     </http>
 
@@ -18,5 +18,5 @@
         <authentication-provider user-service-ref="userService"/>
     </authentication-manager>
 
-    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+    <!-- <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>-->
 </beans:beans>
