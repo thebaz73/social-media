@@ -17,6 +17,7 @@
     <modules>
         <module>social-media-fe-admin</module>
         <module>social-media-fe-asset</module>
+        <module>social-media-fe-customer</module>
         <module>social-media-fe-signon</module>
         <module>social-media-fe-search</module>
         <module>social-media-fe-ui</module>
