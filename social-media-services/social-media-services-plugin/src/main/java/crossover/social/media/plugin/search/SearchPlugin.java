@@ -32,11 +32,11 @@ public interface SearchPlugin<T extends SearchDocument> extends Plugin {
     /**
      * Search index for specified term
      *
-     * @param siteId     site id
      * @param searchTerm search term
+     * @param index search index
      * @return found documents
      */
-    List<T> search(String siteId, String searchTerm);
+    List<T> search(String searchTerm, SearchIndex index);
 
     /**
      * Update a content in index

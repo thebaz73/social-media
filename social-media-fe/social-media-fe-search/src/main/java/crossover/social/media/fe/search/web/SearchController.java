@@ -1,6 +1,7 @@
 package crossover.social.media.fe.search.web;
 
 import crossover.social.media.plugin.search.SearchDocument;
+import crossover.social.media.plugin.search.SearchIndex;
 import crossover.social.media.plugin.service.PluginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,11 +24,11 @@ public class SearchController {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Secured({"ROLE_MANAGER"})
-    @RequestMapping(value = "/search/{siteId}", params = {"q"}, method = RequestMethod.GET)
-    HttpEntity<List<? extends SearchDocument>> contents(@PathVariable("siteId") String siteId,
+    @RequestMapping(value = "/search/{index}", params = {"q"}, method = RequestMethod.GET)
+    HttpEntity<List<? extends SearchDocument>> contents(@PathVariable("index") String index,
                                                         @RequestParam("q") String searchTerms) {
 
-        List<? extends SearchDocument> contents = pluginService.getSearchPlugin().search(siteId, searchTerms);
+        List<? extends SearchDocument> contents = pluginService.getSearchPlugin().search(searchTerms, SearchIndex.forName(index));
         return new ResponseEntity<>(contents, HttpStatus.OK);
     }
 }

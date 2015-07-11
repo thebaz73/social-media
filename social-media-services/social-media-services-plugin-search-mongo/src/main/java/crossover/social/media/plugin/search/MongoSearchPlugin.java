@@ -1,9 +1,7 @@
 package crossover.social.media.plugin.search;
 
 import com.mongodb.Mongo;
-import crossover.social.media.domain.Setting;
-import crossover.social.media.domain.SettingType;
-import crossover.social.media.domain.SocialContent;
+import crossover.social.media.domain.*;
 import crossover.social.media.plugin.PluginOperationException;
 import crossover.social.media.plugin.PluginStatus;
 import crossover.social.media.plugin.search.mongo.MongoTemplateFactory;
@@ -25,7 +23,7 @@ import java.util.stream.Collectors;
  * Created by bazzoni
  */
 @Component
-public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSparkleDocument> {
+public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSearchDocument> {
 
     @Value("classpath:/META-INF/mongo-plugin.properties")
     private Resource resource;
@@ -102,18 +100,34 @@ public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSparkleDocument
     /**
      * Search index for specified term
      *
-     * @param siteId     site id
      * @param searchTerm search term
+     * @param index search index
      * @return found documents
      */
     @Override
-    public List<MongoSparkleDocument> search(String siteId, String searchTerm) {
+    public List<MongoSearchDocument> search(String searchTerm, SearchIndex index) {
         String[] words = searchTerm.split(" ");
         if (words.length == 0) return Collections.emptyList();
-        Criteria conditions = Criteria.where(MongoSparkleDocument.FIELD_SITEID).is(siteId).andOperator(createSearchConditions(words));
-        Query search = new Query(conditions);
-        final List<SocialContent> socialContents = mongoTemplate.find(search, SocialContent.class);
-        return socialContents.stream().map(MongoSparkleDocument::new).collect(Collectors.toList());
+        Criteria conditions;
+        Query search;
+        switch (index) {
+            case CONTENT:
+                conditions = createSearchConditions(words, "content");
+                search = new Query(conditions);
+                final List<SocialContent> socialContents = mongoTemplate.find(search, SocialContent.class);
+                return socialContents.stream().map(MongoSearchDocument::new).collect(Collectors.toList());
+            case CUSTOMER:
+                conditions = createSearchConditions(words, "data");
+                search = new Query(conditions);
+                final List<CustomerData> customerDataList = mongoTemplate.find(search, CustomerData.class);
+                return customerDataList.stream().map(MongoSearchDocument::new).collect(Collectors.toList());
+            case USER:
+                conditions = createSearchConditions(words, "firstName");
+                search = new Query(conditions);
+                final List<Person> persons = mongoTemplate.find(search, Person.class);
+                return persons.stream().map(MongoSearchDocument::new).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     /**
@@ -132,19 +146,15 @@ public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSparkleDocument
         //ignore
     }
 
-    private Criteria createSearchConditions(String[] words) {
+    private Criteria createSearchConditions(String[] words, String field) {
         Criteria conditions = null;
 
         for (String word : words) {
             word = ".*" + normalize(word) + ".*";
             if (conditions == null) {
-                conditions = Criteria.where(MongoSparkleDocument.FIELD_TITLE).regex(word, "i")
-                        /*.orOperator(Criteria.where(MongoSparkleDocument.FIELD_SUMMARY).regex(word, "im"))
-                        .orOperator(Criteria.where(MongoSparkleDocument.FIELD_CONTENT).regex(word, "im"))*/;
+                conditions = Criteria.where(MongoSearchDocument.FIELD_CONTENT).regex(word, "i");
             } else {
-                conditions = conditions.orOperator(Criteria.where(MongoSparkleDocument.FIELD_TITLE).regex(word, "i")
-                        /*.orOperator(Criteria.where(MongoSparkleDocument.FIELD_SUMMARY).regex(word, "im"))
-                        .orOperator(Criteria.where(MongoSparkleDocument.FIELD_CONTENT).regex(word, "im")*/);
+                conditions = conditions.orOperator(Criteria.where(MongoSearchDocument.FIELD_CONTENT).regex(word, "i"));
             }
         }
 
