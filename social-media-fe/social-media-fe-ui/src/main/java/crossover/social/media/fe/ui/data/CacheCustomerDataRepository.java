@@ -2,7 +2,8 @@ package crossover.social.media.fe.ui.data;
 
 import crossover.social.media.domain.CustomerData;
 import crossover.social.media.domain.SocialContent;
-import org.springframework.data.domain.Page;
+import crossover.social.media.fe.ui.data.domain.SearchDocument;
+import crossover.social.media.fe.ui.data.domain.SearchList;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
@@ -40,14 +41,15 @@ public class CacheCustomerDataRepository extends AbstractConfigurableRepository 
 
         HttpEntity<SocialContent> requestEntity = new HttpEntity<>(headers);
         // Pass the new person and header
-        ResponseEntity<Page> entity = template.exchange("http://" + hostname + ":" + port + "/socialContents?page=0&size=3", HttpMethod.GET, requestEntity, Page.class);
-
+        ResponseEntity<SearchList> entity = template.exchange("http://" + hostname + ":" + port + "/api/search/customer?q=" + term, HttpMethod.GET, requestEntity, SearchList.class);
+        final SearchList searchList = entity.getBody();
         List<CustomerData> dataList = new ArrayList<>();
 
-        entity.getBody().getContent().stream().filter(o -> o instanceof CustomerData).forEach(o -> {
-            CustomerData customerData = (CustomerData) o;
+        int i = 0;
+        for (SearchDocument searchDocument : searchList) {
+            CustomerData customerData = new CustomerData(searchDocument.getId(), "Cusotmer0" + (i++), searchDocument.getContent(), "");
             dataList.add(customerData);
-        });
+        }
 
         return dataList;
     }

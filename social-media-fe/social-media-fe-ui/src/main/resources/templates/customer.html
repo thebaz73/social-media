@@ -54,40 +54,38 @@
 
     <div class="row">
 
+
         <!-- Blog Entries Column -->
-        <div class="col-md-8" ng-controller="ContentListCtrl">
+        <div class="col-md-8">
 
             <h1 class="page-header">
                 <span th:if="${person != null}" th:text="${person.firstName + ' ' + person.lastName}"></span>
-                <small>Home page</small>
+                <small>Customer Streams</small>
             </h1>
 
-            <!-- First Blog Post -->
-            <div ng-repeat="content in contents">
-                <h2>
-                    <a href="/post/{{content.id}}">{{content.title}}</a>
-                </h2>
-
-                <p class="lead">
-                    by <a href="/user/{{content.authorId}}">{{content.author}}</a>
-                </p>
-
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {{content.timestamp}}</p>
-
-                <p>{{content.post}}</p>
-                <a class="btn btn-primary" href="/post/{{content.id}}">Read More <span
-                        class="glyphicon glyphicon-chevron-right"></span></a>
-            </div>
-
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
+            <form class="form-horizontal" role="form" th:action="@{/streams/customer/search}" action="#"
+                  method="GET">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                </div>
+            </form>
+            <section class="col-lg-12" th:unless="${#lists.isEmpty(allCustomers)}">
+                <div class="lead"> Search results</div>
+                <div th:each="aCustomer : ${allCustomers}">
+                    <dt>Customer: <span th:text="${aCustomer.customer}">data</span></dt>
+                    <dd>
+                        <div th:text="${aCustomer.data}">Data</div>
+                        <a class="btn btn-primary" th:href="@{${'/streams/customer/'+aCustomer.id}}">Read More <span
+                                class="glyphicon glyphicon-chevron-right"></span></a>
+                    </dd>
+                    <hr/>
+                </div>
+            </section>
 
         </div>
 

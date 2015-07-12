@@ -50,4 +50,8 @@ socialMediaApp.controller('ContentListCtrl', function ($scope, $http) {
             'timestamp': new Date()
         }
     ];
+}).controller('ContentListCtrl', function ($scope, $http) {
+    $http.get('streams/customer/search').success(function (data) {
+        $scope.customers = data;
+    });
 });
