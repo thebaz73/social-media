@@ -3,7 +3,8 @@ package crossover.social.media.fe.ui.data;
 import crossover.social.media.domain.Person;
 import crossover.social.media.domain.SocialContent;
 import crossover.social.media.domain.User;
-import org.springframework.cache.annotation.Cacheable;
+import crossover.social.media.fe.ui.data.domain.PersonList;
+import crossover.social.media.fe.ui.data.domain.UserList;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,6 @@ public class CacheUserRepository extends AbstractConfigurableRepository {
         prepareHttpClient();
     }
 
-    @Cacheable("user")
     public List<User> findByUsername(String username) {
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
 
@@ -44,10 +44,9 @@ public class CacheUserRepository extends AbstractConfigurableRepository {
         // Pass the new person and header
         ResponseEntity<UserList> entity = template.exchange("http://" + hostname + ":" + port + "/users/search/findByUsername?username=" + username, HttpMethod.GET, requestEntity, UserList.class);
 
-        return entity.getBody();
+        return entity.getBody()._embedded.users;
     }
 
-    @Cacheable("user")
     public Person findPerson(String id) {
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
 
@@ -60,12 +59,11 @@ public class CacheUserRepository extends AbstractConfigurableRepository {
 
         HttpEntity<SocialContent> requestEntity = new HttpEntity<>(headers);
         // Pass the new person and header
-        ResponseEntity<PersonList> entity = template.exchange("http://" + hostname + ":" + port + "/persons/" + id, HttpMethod.GET, requestEntity, PersonList.class);
+        ResponseEntity<Person> entity = template.exchange("http://" + hostname + ":" + port + "/persons/" + id, HttpMethod.GET, requestEntity, Person.class);
 
-        return entity.getBody().get(0);
+        return entity.getBody();
     }
 
-    @Cacheable("user")
     public Person findPersonByUserId(String userId) {
 
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
@@ -79,14 +77,8 @@ public class CacheUserRepository extends AbstractConfigurableRepository {
 
         HttpEntity<SocialContent> requestEntity = new HttpEntity<>(headers);
         // Pass the new person and header
-        ResponseEntity<PersonList> entity = template.exchange("http://" + hostname + ":" + port + "/persons/search/findByUserId=" + userId, HttpMethod.GET, requestEntity, PersonList.class);
+        ResponseEntity<PersonList> entity = template.exchange("http://" + hostname + ":" + port + "/persons/search/findByUserId?userId=" + userId, HttpMethod.GET, requestEntity, PersonList.class);
 
-        return entity.getBody().get(0);
-    }
-
-    class UserList extends ArrayList<User> {
-    }
-
-    class PersonList extends ArrayList<Person> {
+        return entity.getBody()._embedded.persons.get(0);
     }
 }

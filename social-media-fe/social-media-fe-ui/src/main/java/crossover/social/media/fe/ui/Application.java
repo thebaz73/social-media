@@ -34,7 +34,7 @@ public class Application implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        final File props = Paths.get(args[0]).toFile();
+        final File props = Paths.get(args[1]).toFile();
         if (!props.exists()) {
             throw new RuntimeException("No service property file");
         }

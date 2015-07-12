@@ -1,10 +1,9 @@
 package crossover.social.media.fe.ui.data;
 
-import crossover.social.media.domain.Person;
 import crossover.social.media.domain.SocialContent;
+import crossover.social.media.fe.ui.data.domain.ContentList;
 import crossover.social.media.fe.ui.web.model.ContentData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
@@ -44,25 +43,23 @@ public class CacheContentRepository extends AbstractConfigurableRepository {
 
         HttpEntity<SocialContent> requestEntity = new HttpEntity<>(headers);
         // Pass the new person and header
-        ResponseEntity<Page> entity = template.exchange("http://" + hostname + ":" + port + "/socialContents?page=" + page + "&size=" + size, HttpMethod.GET, requestEntity, Page.class);
+        ResponseEntity<ContentList> entity = template.exchange("http://" + hostname + ":" + port + "/socialContents?page=" + page + "&size=" + size, HttpMethod.GET, requestEntity, ContentList.class);
 
         final List<ContentData> dataList = new ArrayList<>();
-
-        entity.getBody().getContent().stream().filter(o -> o instanceof SocialContent).forEach(o -> {
-            SocialContent socialContent = (SocialContent) o;
-
+        for (SocialContent socialContent : entity.getBody()._embedded.socialContents) {
             ContentData contentData = new ContentData();
             contentData.setId(socialContent.getId());
             contentData.setTitle(socialContent.getTitle());
             contentData.setTimestamp(socialContent.getModificationDate());
             contentData.setAuthorId(socialContent.getAuthorId());
 
-            final Person person = cacheUserRepository.findPerson(socialContent.getAuthorId());
-            contentData.setAuthor(String.format("%s %s", person.getFirstName(), person.getLastName()));
+            //final Person person = cacheUserRepository.findPerson(socialContent.getAuthorId());
+            //contentData.setAuthor(String.format("%s %s", person.getFirstName(), person.getLastName()));
+            contentData.setAuthor(String.format("%s %s", "", ""));
 
             contentData.setPost(socialContent.getContent());
             dataList.add(contentData);
-        });
+        }
         return dataList;
     }
 }

@@ -23,8 +23,8 @@ public class CacheCustomerDataRepository extends AbstractConfigurableRepository 
      */
     @Override
     public void initialize() {
-        hostname = properties.getProperty("searching.hostname", "localhost");
-        port = Integer.parseInt(properties.getProperty("searching.port", "9000"));
+        hostname = properties.getProperty("search.hostname", "localhost");
+        port = Integer.parseInt(properties.getProperty("search.port", "9000"));
         prepareHttpClient();
     }
 

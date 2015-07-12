@@ -68,6 +68,7 @@ public class Application implements CommandLineRunner {
         initializer.addUser(authorUsername, authorPassword, RoleName.ROLE_AUTHOR);
         initializer.addUser(managerUsername, managerPassword, RoleName.ROLE_MANAGER);
 
+        initializer.addBlog();
     }
 }
 
