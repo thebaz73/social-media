@@ -27,10 +27,7 @@ public class CustomerManager {
             CustomerData data = new CustomerData();
             data.setCompanyId(company.getId());
             data.setCustomer(RandomStringUtils.randomAscii(15));
-            String content = "";
-            for (int j = 0; j < 20; j++) {
-                content += RandomStringUtils.randomAscii(10) + " ";
-            }
+            String content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sodales eros. Ut porta congue mattis. Etiam augue sem, laoreet id risus vel, maximus tincidunt odio. Phasellus convallis ante nunc, vitae tincidunt tellus commodo non. Phasellus finibus, tellus ac rhoncus interdum, risus nibh auctor enim, id lobortis erat mi quis urna. In faucibus sit amet metus non commodo. Praesent pretium, arcu sed consectetur hendrerit, enim nulla lobortis nisl, nec elementum libero est gravida neque. Vivamus porta mi augue, ut ultricies nunc elementum in. Donec lobortis ex risus, et fermentum nisl cursus sed.";
             data.setData(content);
             customerDataRepository.save(data);
         }

@@ -2,6 +2,7 @@ package crossover.social.media.fe.ui.web;
 
 import crossover.social.media.domain.Company;
 import crossover.social.media.domain.Person;
+import crossover.social.media.domain.User;
 import crossover.social.media.fe.ui.data.CacheContentRepository;
 import crossover.social.media.fe.ui.data.CacheUserRepository;
 import crossover.social.media.fe.ui.web.model.ContentData;
@@ -33,8 +34,13 @@ public class HomeController {
     }
 
     @ModelAttribute("person")
-    Person person() {
-        return cacheUserRepository.findPerson("");
+    Person person(HttpServletRequest request) {
+        final List<User> byUsername = cacheUserRepository.findByUsername(request.getRemoteUser());
+        if (!byUsername.isEmpty()) {
+            return cacheUserRepository.findPersonByUserId(byUsername.get(0).getId());
+        }
+
+        return new Person();
     }
 
     @RequestMapping({"/"})
@@ -57,6 +63,6 @@ public class HomeController {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
-        return cacheContentRepository.findLastContents(calendar.getTime());
+        return cacheContentRepository.findLastContents(page, size);
     }
 }

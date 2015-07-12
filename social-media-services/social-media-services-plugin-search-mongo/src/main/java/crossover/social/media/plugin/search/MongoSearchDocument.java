@@ -10,7 +10,6 @@ import crossover.social.media.domain.SocialContent;
  * Created by bazzoni
  */
 public class MongoSearchDocument implements SearchDocument {
-    public static final String FIELD_CONTENT = "content";
     private final String id;
     private final String content;
 

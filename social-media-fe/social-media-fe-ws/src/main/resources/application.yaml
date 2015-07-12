@@ -40,6 +40,16 @@ logging:
     level.org.springframework: INFO
     level.crossover.social: WARN
 
+social:
+    media.admin.username: admin
+    media.admin.password: q1w2e3r4
+    media.viewer.username: viewer
+    media.viewer.password: q1w2e3r4
+    media.author.username: author
+    media.author.password: q1w2e3r4
+    media.manager.username: manager
+    media.manager.password: q1w2e3r4
+
 server:
     port: 80
     address: 0.0.0.0

@@ -3,23 +3,14 @@ package crossover.social.media.fe.ui.data;
 import crossover.social.media.domain.Person;
 import crossover.social.media.domain.SocialContent;
 import crossover.social.media.fe.ui.web.model.ContentData;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,43 +18,21 @@ import java.util.List;
  * Created by bazzoni on 11/07/2015.
  */
 @Component
-public class CacheContentRepository {
-    protected String siteId;
-    protected HttpClient client;
+public class CacheContentRepository extends AbstractConfigurableRepository {
     @Autowired
     private CacheUserRepository cacheUserRepository;
-    @Value("${social.media.admin.username}")
-    private String username = "admin";
-    @Value("${social.media.admin.password}")
-    private String password = "admin";
-    @Value("${social.media.repository.service.host}")
-    private String hostname = "localhost";
-    @Value("${social.media.repository.service.port}")
-    private int port = 9000;
 
-    protected void prepareHttpClient() {
-        int timeout = 5;
-
-        RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(timeout * 1000)
-                .setConnectionRequestTimeout(timeout * 1000)
-                .setSocketTimeout(timeout * 1000)
-                .build();
-
-        BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        AuthScope authScope = new AuthScope(hostname, port, AuthScope.ANY_REALM);
-        Credentials credentials = new UsernamePasswordCredentials(username, password);
-        credentialsProvider.setCredentials(authScope, credentials);
-
-        client = HttpClientBuilder.create()
-                .setDefaultRequestConfig(config)
-                .setDefaultCredentialsProvider(credentialsProvider)
-                .build();
+    /**
+     * Initializes all CacheRepository with Web services uri
+     */
+    @Override
+    public void initialize() {
+        hostname = properties.getProperty("repository.hostname", "localhost");
+        port = Integer.parseInt(properties.getProperty("repository.port", "9000"));
+        prepareHttpClient();
     }
 
-    @Cacheable("content")
-    public List<ContentData> findLastContents(Date time) {
-        //TODO call remote WS service
+    public List<ContentData> findLastContents(int page, int size) {
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory(client));
 
         // Prepare acceptable media type
@@ -75,11 +44,13 @@ public class CacheContentRepository {
 
         HttpEntity<SocialContent> requestEntity = new HttpEntity<>(headers);
         // Pass the new person and header
-        @SuppressWarnings("rawtypes")
-        ResponseEntity<SocialContentList> entity = template.exchange("http://" + hostname + ":" + port + "/socialContents?page=0&size=3", HttpMethod.GET, requestEntity, SocialContentList.class);
+        ResponseEntity<Page> entity = template.exchange("http://" + hostname + ":" + port + "/socialContents?page=" + page + "&size=" + size, HttpMethod.GET, requestEntity, Page.class);
 
         final List<ContentData> dataList = new ArrayList<>();
-        for (SocialContent socialContent : entity.getBody()) {
+
+        entity.getBody().getContent().stream().filter(o -> o instanceof SocialContent).forEach(o -> {
+            SocialContent socialContent = (SocialContent) o;
+
             ContentData contentData = new ContentData();
             contentData.setId(socialContent.getId());
             contentData.setTitle(socialContent.getTitle());
@@ -91,10 +62,7 @@ public class CacheContentRepository {
 
             contentData.setPost(socialContent.getContent());
             dataList.add(contentData);
-        }
+        });
         return dataList;
-    }
-
-    class SocialContentList extends ArrayList<SocialContent> {
     }
 }

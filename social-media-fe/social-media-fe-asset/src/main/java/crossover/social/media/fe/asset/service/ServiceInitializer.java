@@ -51,7 +51,7 @@ public class ServiceInitializer extends AbstractPluginInitializer {
         final List<Setting> byKey = settingRepository.findByKey("oak.activate");
         if (!byKey.isEmpty()) {
             Setting activeSetting = byKey.get(0);
-            if ((Boolean) activeSetting.getValue()) {
+            if (!(Boolean) activeSetting.getValue()) {
                 activeSetting.setValue(Boolean.TRUE);
                 settingRepository.save(activeSetting);
             }

@@ -152,9 +152,9 @@ public class MongoSearchPlugin extends AbstractSearchPlugin<MongoSearchDocument>
         for (String word : words) {
             word = ".*" + normalize(word) + ".*";
             if (conditions == null) {
-                conditions = Criteria.where(MongoSearchDocument.FIELD_CONTENT).regex(word, "i");
+                conditions = Criteria.where(field).regex(word, "i");
             } else {
-                conditions = conditions.orOperator(Criteria.where(MongoSearchDocument.FIELD_CONTENT).regex(word, "i"));
+                conditions = conditions.orOperator(Criteria.where(field).regex(word, "i"));
             }
         }
 
